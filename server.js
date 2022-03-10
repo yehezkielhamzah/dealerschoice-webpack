@@ -5,7 +5,7 @@ const app = express();
 const path = require('path');
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
-app.get('/', (req, res)=> res.sendFile(path.join(__dirname, 'index.html')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 app.get('/api/tasks', async(req, res, next)=>{
   try {
@@ -19,6 +19,14 @@ app.get('/api/tasks', async(req, res, next)=>{
 const init = async()=> {
   try {
     await sequelize.sync({ force: true });
+    await Promise.all([
+      Post.random(),
+      Post.random(),
+      Post.random(),
+      Post.random(),
+    ])
+
+
     const port = process.env.PORT || 3000;
     app.listen(port, ()=> console.log(`listening on port ${port}`));
   }
@@ -28,3 +36,31 @@ const init = async()=> {
 };
 
 init();
+
+const tags = ["#life", "#chicken", "#fullstack", "#hashtag", "#prof", "#code", "#job", "#wfh"]
+
+const user = ["@leonard", "@phillip", "@marc", "@justin"]
+
+const randomItem = function(array) {
+  var randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+};
+
+const message = function() {
+  return [randomItem(tags), randomItem(user)].join(' ')
+};
+
+const Post = sequelize.define('post', {
+  twit: {
+    type: Sequelize.STRING
+  }
+})
+
+Post.random = function (){
+  return this.create({ twit: `Post ${message()} `})
+}
+
+
+
+
+
