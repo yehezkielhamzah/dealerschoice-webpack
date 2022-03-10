@@ -9,12 +9,22 @@ app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 app.get('/api/tasks', async(req, res, next)=>{
   try {
-    res.send('hello world')
+    res.send(await Post.findAll())
   }
   catch (e) {
     next (e)
   }
 });
+
+app.post('/api/tasks', async(req, res, next)=>{
+  try {
+    res.send(await Post.random())
+  }
+  catch (e) {
+    next (e)
+  }
+});
+
 
 const init = async()=> {
   try {
