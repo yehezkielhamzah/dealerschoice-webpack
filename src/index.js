@@ -11,6 +11,7 @@ class App extends React.Component {
       posts: []
     }
     console.log('constructor', this.state)
+    this.create = this.create.bind(this)
   }
 
   // async componentDidMount() {
@@ -22,8 +23,18 @@ class App extends React.Component {
   // }
 
   async componentDidMount() {
-    const posts = (await axios.get('/api/posts')).data
+    const response = await axios.get('/api/posts')
+    const posts = response.data
     this.setState({ posts })
+  }
+
+  async create() {
+    const response = await axios.post('/api/posts')
+    const post = response.data
+    const posts = [...this.state.posts, post]
+    this.setState({ posts })
+
+    // console.log(post)
   }
 
   render () {
@@ -33,6 +44,7 @@ class App extends React.Component {
     return (
       <div id="container">
         <h1>#hashtag</h1>
+        <button onClick={this.create}>Generate Post</button>
         <ul>
           {
             posts.map( (post) => {

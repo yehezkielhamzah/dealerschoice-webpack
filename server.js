@@ -16,9 +16,9 @@ app.get('/api/posts', async(req, res, next)=>{
   }
 });
 
-app.post('/api/tasks', async(req, res, next)=>{
+app.post('/api/posts', async(req, res, next)=>{
   try {
-    res.send(await Post.random())
+    res.status(201).send(await Post.random())
   }
   catch (e) {
     next (e)
