@@ -7,7 +7,7 @@ const path = require('path');
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
-app.get('/api/tasks', async(req, res, next)=>{
+app.get('/api/posts', async(req, res, next)=>{
   try {
     res.send(await Post.findAll())
   }
