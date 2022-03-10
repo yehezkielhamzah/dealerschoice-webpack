@@ -49,7 +49,7 @@ init();
 
 const tags = ["#life", "#chicken", "#fullstack", "#hashtag", "#prof", "#code", "#job", "#wfh"]
 
-const user = ["@leonard", "@phillip", "@marc", "@justin"]
+const user = ["@rebecca", "@liza", "@marc", "@justin", "@jesse", "@zeke", "@keith", "@ana"]
 
 const randomItem = function(array) {
   var randomIndex = Math.floor(Math.random() * array.length);

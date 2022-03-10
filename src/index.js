@@ -36,7 +36,7 @@ class App extends React.Component {
         <ul>
           {
             posts.map( (post) => {
-              return <li>{post.twit}</li>
+              return <li key={ post.id }>{post.twit}</li>
             })
           }
         </ul>
